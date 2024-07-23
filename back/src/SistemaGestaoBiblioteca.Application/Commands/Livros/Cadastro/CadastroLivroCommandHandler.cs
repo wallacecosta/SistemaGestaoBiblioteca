@@ -3,22 +3,22 @@ using SistemaGestaoBiblioteca.Application.Interfaces;
 using SistemaGestaoBiblioteca.Application.Model;
 using SistemaGestaoBiblioteca.Domain.Entidades;
 
-namespace SistemaGestaoBiblioteca.Application.CadastroDeLivro
+namespace SistemaGestaoBiblioteca.Application.Commands.Livros.Cadastro
 {
     public class CadastroLivroCommandHandler(IUnitOfWork unitOfWork) : IRequestHandler<CadastroLivroCommand, CadastroLivroResponse>
     {
         public async Task<CadastroLivroResponse> Handle(CadastroLivroCommand command, CancellationToken cancellationToken)
         {
-            if (string.IsNullOrWhiteSpace(command.Request.Nome))
+            if (string.IsNullOrWhiteSpace(command.Nome))
                 throw new ArgumentException("Nome do livro deve ser informado");
 
-            var autor = await unitOfWork.AutorRepository.GetAsync(command.Request.Autor.Id)
-                ?? throw new ArgumentException($"Autor {command.Request.Autor.Nome} {command.Request.Autor.Sobrenome} não encontrado, é requerido para criar livro");
+            var autor = await unitOfWork.AutorRepository.GetAsync(command.Autor.Id)
+                ?? throw new ArgumentException($"Autor {command.Autor.Nome} {command.Autor.Sobrenome} não encontrado, é requerido para criar livro");
 
-            var genero = await unitOfWork.GeneroRepository.GetAsync(command.Request.Genero.Id)
-                ?? throw new ArgumentException($"Gênero {command.Request.Genero.Nome} não encontrado, é requerido para criar livro");
+            var genero = await unitOfWork.GeneroRepository.GetAsync(command.Genero.Id)
+                ?? throw new ArgumentException($"Gênero {command.Genero.Nome} não encontrado, é requerido para criar livro");
 
-            var livro = new Livro(command.Request.Nome, genero, autor);
+            var livro = new Livro(command.Nome, genero, autor);
 
             await unitOfWork.LivroRepository.AddAsync(livro);
             await unitOfWork.CommitAsync();

@@ -7,7 +7,7 @@
 
         public Genero(string nome)
         {
-            Nome = string.IsNullOrWhiteSpace(nome) ? throw new ArgumentException("Nome é obrigatório!") : nome;
+            Nome = string.IsNullOrWhiteSpace(nome) ? throw new ArgumentException("Nome do Gênero deve ser informado") : nome;
         }
     }
 }
