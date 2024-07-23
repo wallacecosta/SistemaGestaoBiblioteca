@@ -1,10 +1,10 @@
 using Moq;
-using SistemaGestaoBiblioteca.Application.CadastroDeLivro;
+using SistemaGestaoBiblioteca.Application.Commands.Livros.Cadastro;
 using SistemaGestaoBiblioteca.Application.Interfaces;
 using SistemaGestaoBiblioteca.Application.Model;
 using SistemaGestaoBiblioteca.Domain.Entidades;
 
-namespace SistemaGestaoBiblioteca.UnitTests
+namespace SistemaGestaoBiblioteca.UnitTests.Commands.Livros
 {
     public class CadastroDeLivrosTests
     {
@@ -14,9 +14,7 @@ namespace SistemaGestaoBiblioteca.UnitTests
             var autor = new Autor("Escritor", "Fantasma");
             var genero = new Genero("Ficção");
             var mockUnitOfWork = new Mock<IUnitOfWork>();
-            var request = new CadastrarLivroRequest("", AutorModel.MapFrom(autor), GeneroModel.MapFrom(genero));
-            var command = new CadastroLivroCommand(request);
-
+            var command = new CadastroLivroCommand("", AutorModel.MapFrom(autor), GeneroModel.MapFrom(genero));
             var commandHandler = new CadastroLivroCommandHandler(mockUnitOfWork.Object);
 
             var ex = await Assert.ThrowsAsync<ArgumentException>(() => commandHandler.Handle(command, CancellationToken.None));
@@ -29,8 +27,7 @@ namespace SistemaGestaoBiblioteca.UnitTests
             var autorModel = new AutorModel(Guid.NewGuid(), "Escritor", "Fantasma", []);
             var genero = new Genero("Ficção");
             var mockUnitOfWork = new Mock<IUnitOfWork>();
-            var request = new CadastrarLivroRequest("Jornada Fantasma", autorModel, GeneroModel.MapFrom(genero));
-            var command = new CadastroLivroCommand(request);
+            var command = new CadastroLivroCommand("Jornada Fantasma", autorModel, GeneroModel.MapFrom(genero));
 
             mockUnitOfWork.Setup(u => u.AutorRepository.GetAsync(autorModel.Id)).ReturnsAsync(null as Autor);
 
@@ -46,8 +43,7 @@ namespace SistemaGestaoBiblioteca.UnitTests
             var autor = new Autor("Escritor", "Fantasma");
             var genero = new Genero("Ficção");
             var mockUnitOfWork = new Mock<IUnitOfWork>();
-            var request = new CadastrarLivroRequest("Jornada Fantasma", AutorModel.MapFrom(autor), GeneroModel.MapFrom(genero));
-            var command = new CadastroLivroCommand(request);
+            var command = new CadastroLivroCommand("Jornada Fantasma", AutorModel.MapFrom(autor), GeneroModel.MapFrom(genero));
 
             mockUnitOfWork.Setup(u => u.AutorRepository.GetAsync(autor.Id)).ReturnsAsync(autor);
             mockUnitOfWork.Setup(u => u.GeneroRepository.GetAsync(genero.Id)).ReturnsAsync(null as Genero);
@@ -64,8 +60,7 @@ namespace SistemaGestaoBiblioteca.UnitTests
             var autor = new Autor("Escritor", "Fantasma");
             var genero = new Genero("Ficção");
             var mockUnitOfWork = new Mock<IUnitOfWork>();
-            var request = new CadastrarLivroRequest("Jornada Fantasma", AutorModel.MapFrom(autor), GeneroModel.MapFrom(genero));
-            var command = new CadastroLivroCommand(request);
+            var command = new CadastroLivroCommand("Jornada Fantasma", AutorModel.MapFrom(autor), GeneroModel.MapFrom(genero));
 
             mockUnitOfWork.Setup(u => u.GeneroRepository.GetAsync(genero.Id)).ReturnsAsync(genero);
             mockUnitOfWork.Setup(u => u.AutorRepository.GetAsync(autor.Id)).ReturnsAsync(autor);
