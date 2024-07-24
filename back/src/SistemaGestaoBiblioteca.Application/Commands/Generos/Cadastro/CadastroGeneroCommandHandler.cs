@@ -12,6 +12,7 @@ namespace SistemaGestaoBiblioteca.Application.Commands.Generos.Cadastro
             var genero = new Genero(request.Nome);
 
             await unitOfWork.GeneroRepository.AddAsync(genero);
+            await unitOfWork.CommitAsync();
 
             return await Task.FromResult(new CadastroGeneroResponse(GeneroModel.MapFrom(genero)));
         }

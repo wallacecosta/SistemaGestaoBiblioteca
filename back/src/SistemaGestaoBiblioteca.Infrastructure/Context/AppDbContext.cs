@@ -1,11 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SistemaGestaoBiblioteca.Domain.Entidades;
+using SistemaGestaoBiblioteca.Infrastructure.Configuration;
 using System.Data;
 
-namespace SistemaGestaoBiblioteca.Infrastructure
+namespace SistemaGestaoBiblioteca.Infrastructure.Context
 {
-    public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
+    public class AppDbContext : DbContext
     {
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
+        }
+
         public IDbConnection Connection => Database.GetDbConnection();
 
         public DbSet<Livro> Livros { get; set; }

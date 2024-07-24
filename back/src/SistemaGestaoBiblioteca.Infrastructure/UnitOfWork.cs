@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 using SistemaGestaoBiblioteca.Application.Interfaces;
+using SistemaGestaoBiblioteca.Infrastructure.Context;
 
 namespace SistemaGestaoBiblioteca.Infrastructure
 {
