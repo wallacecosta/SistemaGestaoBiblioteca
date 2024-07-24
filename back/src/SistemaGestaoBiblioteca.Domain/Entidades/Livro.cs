@@ -8,6 +8,8 @@
         public virtual Genero Genero { get; }
         public virtual Autor Autor { get; }
 
+        private Livro() { }
+
         public Livro(string nome, Genero genero, Autor autor)
         {
             Nome = string.IsNullOrWhiteSpace(nome) ? throw new ArgumentException("Nome precisa ser válido") : nome;

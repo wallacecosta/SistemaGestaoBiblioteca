@@ -4,7 +4,7 @@
     {
         public string Nome { get; }
         public string Sobrenome { get; }
-        public ICollection<Livro>? Livros { get; }
+        public virtual ICollection<Livro>? Livros { get; }
 
         public Autor(string nome, string sobrenome)
         {

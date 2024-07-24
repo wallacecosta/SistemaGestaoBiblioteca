@@ -11,6 +11,7 @@ namespace SistemaGestaoBiblioteca.Application.Commands.Livros.Exclusao
                 ?? throw new ArgumentException("Livro não encontrado para excluir.");
 
             unitOfWork.LivroRepository.Delete(livroExistente);
+            await unitOfWork.CommitAsync();
 
             return await Task.FromResult(new ExclusaoLivroResponse("Livro excluído com sucesso!"));
         }

@@ -2,7 +2,7 @@
 
 namespace SistemaGestaoBiblioteca.Application.Interfaces
 {
-    public interface ILivroRepository : IRepository<Livro>
+    public interface ILivroRepository : IAutorRepository<Livro>
     {
     }
 }

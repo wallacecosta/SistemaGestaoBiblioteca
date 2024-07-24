@@ -1,6 +1,6 @@
 ﻿namespace SistemaGestaoBiblioteca.Application.Interfaces
 {
-    public interface IRepository<T> where T : class
+    public interface IAutorRepository<T> where T : class
     {
         Task<T?> GetAsync(Guid id);
         Task<IEnumerable<T>> GetAllAsync();
