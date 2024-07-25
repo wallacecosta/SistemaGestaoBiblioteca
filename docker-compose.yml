@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+    db-reserva:
+        container_name: db-local
+        image: mcr.microsoft.com/mssql/server:2017-CU8-ubuntu
+        restart: always
+        environment: 
+            - SA_PASSWORD=P@ssw0rd
+            - ACCEPT_EULA=Y
+        ports: 
+            - "1433:1433"
+        volumes:
+            - db-data:/var/opt/mssql/data
+            - log:/var/opt/mssql/log
+            - secrets:/var/opt/mssql/secrets
+
+    sistema-gerenciamento-biblioteca-api:
+        container_name: sistema-gerenciamento-biblioteca-api
+        build: back/.
+        restart: always
+        ports: 
+            - "7520:80"
+
+volumes:
+    db-data:
+    log:
+    secrets:
