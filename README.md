@@ -1,6 +1,20 @@
 # SistemaGestaoBiblioteca
 Sistemas para gestão de bibliotecas 
 
+## Back-end
+
+NET 8
+
+Banco SQL Server
+
+## Subida do ambiente
+
+1. Via Docker
+	1. docker compose up -d ou executar docker-compose do projeto.
+	2. **Back-end**: Executando assim na porta 7520 é possível ver o swagger e conhecer as rotas da aplicação back-end. 
+		http://localhost:7520/swagger/index.html
+    3. **Front-end**: Em andamento 
+
 ## Regra de Negócio
 Nossa solução deve permitir o cadastro, consulta e manutenção de gêneros, autores e livros. 
 
